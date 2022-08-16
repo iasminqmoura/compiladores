@@ -4,9 +4,14 @@
 void main()
 {
 	FILE *arq;
+	char caractere;
 	char linha[100];
+	
 	char *result;
-	int contaLinha;
+	
+	int contaLinha = 0;
+	int contaCaracter;
+
 	
 	arq = fopen("arquivo.txt", "rt");
 	
@@ -14,17 +19,21 @@ void main()
 		printf("Problemas na abertura do arquivo.\n");
 		return;
 	}
-	
-	contaLinha = 0;
+
 	
 	while (!feof(arq)){
+		if(caractere != 'nn' && caractere !='n0'){
+			contaCaracter = contaCaracter + 1;
+			caractere = getc(arq);
+		}
+		
 		result = fgets(linha, 100, arq);
 		contaLinha++;
 	}
 	
-	if (result){
-			printf("O arquivo possui %d linhas", contaLinha);
-		}
-
+	printf("A quantidade de caracteres eh: %d\n", contaCaracter);
+	printf("A quantidade de linhas eh: %d\n", contaLinha);
+			
+	
 	fclose(arq);
 }
